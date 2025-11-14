@@ -85,7 +85,7 @@ stateDiagram-v2
 ### **`button_debouncer.v`**
 - This is actually our "input filter."
 - It cleans noisy button signals and outputs a single clean pulse per button press.
-- Four instances are used in 'simon_top' to handle all player inputs.
+- Four instances are used in 'main' to handle all player inputs.
 
 ---
 
@@ -133,10 +133,10 @@ Follow these steps to build and run the project on an FPGA:
    Launch the Quartus Prime software and create a new project.
 
 3. **Add `.v` files to the project**:  
-   Include all Verilog files (`simon_top.v`, `game_fsm.v`, ...) in the project.
+   Include all Verilog files (`main.v`, `game_fsm.v`, ...) in the project.
 
 4. **Set the top-level entity**:  
-   - Right-click on `simon_top.v` in the "Files" list.  
+   - Right-click on `main.v` in the "Files" list.  
    - Select **"Set as Top-Level Entity"**.
 
 5. **Pin Assignment**:  
