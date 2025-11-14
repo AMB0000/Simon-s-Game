@@ -77,48 +77,48 @@ stateDiagram-v2
 ---
 
 ### **`clock_divider.v`**
-- The "heartbeat" of the game.
-- Divides the 50MHz FPGA clock down to 100Hz (one pulse every 10ms) for human-scale delays.
+- This part is the "heartbeat" of the game.
+- It divides the 50MHz FPGA clock down to 100Hz which means one pulse every 10ms in order to make it visible for human eye.
 
 ---
 
 ### **`button_debouncer.v`**
-- The "input filter."
-- Cleans noisy button signals and outputs a single clean pulse per button press.
-- Four instances are used in `simon_top` to handle all player inputs.
+- This is actually our "input filter."
+- It cleans noisy button signals and outputs a single clean pulse per button press.
+- Four instances are used in 'simon_top' to handle all player inputs.
 
 ---
 
 ### **`pattern_memory.v`**
-- The "long-term memory" of the game.
-- A 64-entry, 2-bit wide RAM that stores the sequence of colors.
+- As its name suggests, this is the "long-term memory" of the game.
+- It's a 64-entry, 2-bit wide RAM that stores the sequence of colors.
 - FSM writes new random colors during `S_LEVEL_UP` and reads the sequence during `S_SHOW_LED_ON` and `S_CHECK_INPUT`.
 
 ---
 
 ### **`lfsr.v`**
 - The "randomizer."
-- An 8-bit Linear Feedback Shift Register (LFSR) that generates pseudo-random sequences.
-- FSM uses the current 2-bit value during `S_LEVEL_UP` to select the next color.
+- This is an 8bit Linear Feedback Shift Register or simply LFSR that generates random sequences.
+- FSM uses the current 2bit value during `S_LEVEL_UP` to select the next color.
 
 ---
 
 ### **`seven_seg.v`**
-- The "display driver."
-- Converts a 4-bit score into signals to drive the 7-segment HEX0 display.
+- Display
+- It converts a 4bit score into signals to drive the 7segment HEX0 display.
 
 ---
 
 ## Features
 
-- **Random Sequence Generation**: Uses an 8-bit Linear Feedback Shift Register (LFSR) to generate a new, pseudo-random color for each level.
+- **Random Sequence Generation**: Uses an 8 bit Linear Feedback Shift Register to generate a new random color for each level.
 - **Growing Difficulty**: The pattern sequence adds one new color every round.
-- **Score Tracking**: Displays the current level on a 7-segment HEX0 display.
+- **Score Tracking**: Shows the current level on a 7 segment HEX0 display.
 - **Full I/O Handling**:
-  - Input: Reads from physical switches (or buttons).
-  - Debouncing: Includes a robust `button_debouncer` module for noise-free input.
-  - Output: Drives 4 game LEDs, 2 status LEDs (Success/Fail), and the 7-segment display.
-- **Game States**: Managed by a full Finite State Machine (FSM) with states like `IDLE`, `SHOW_PATTERN`, `WAIT_INPUT`, `SUCCESS`, and `FAIL`.
+  - Input: Reads from physical switches.
+  - Debouncing: Includes `button_debouncer` module for without noise input.
+  - Output: Drives 4 game LEDs, 2 status LEDs which are Success or Fail and the 7-segment display.
+- **Game States**: Managed by a full Finite State Machine with states like `IDLE`, `SHOW_PATTERN`, `WAIT_INPUT`, `SUCCESS` and `FAIL`.
 
 ---
 
@@ -133,7 +133,7 @@ Follow these steps to build and run the project on an FPGA:
    Launch the Quartus Prime software and create a new project.
 
 3. **Add `.v` files to the project**:  
-   Include all Verilog files (`simon_top.v`, `game_fsm.v`, etc.) in the project.
+   Include all Verilog files (`simon_top.v`, `game_fsm.v`, ...) in the project.
 
 4. **Set the top-level entity**:  
    - Right-click on `simon_top.v` in the "Files" list.  
@@ -142,55 +142,55 @@ Follow these steps to build and run the project on an FPGA:
 5. **Pin Assignment**:  
    Open the **Pin Planner** (Assignments > Pin Planner) and assign the following FPGA pins based on your board's configuration:  
    - **CLOCK_50**: Connect to your board's 50MHz clock pin.  
-   - **KEY[0]**: Assign to a pushbutton (e.g., KEY0).  
-   - **SW[3:0]**: Assign to four slide switches (e.g., SW0 - SW3).  
-   - **LEDR[9:0]**: Assign to ten red LEDs (e.g., LEDR0 - LEDR9).  
-   - **HEX0[6:0]**: Assign to the segments of a 7-segment display (e.g., HEX0_A - HEX0_G).
+   - **KEY[0]**: Assign to a pushbutton  
+   - **SW[3:0]**: Assign to four slide switches 
+   - **LEDR[9:0]**: Assign to ten red LEDs  
+   - **HEX0[6:0]**: Assign to the segments of a 7-segment display
 
 6. **Compile the project**:  
-   Start the compilation process by going to **Processing > Start Compilation** in Quartus Prime.
+   Start the compilation by going to **Processing > Start Compilation** in Quartus.
 
 7. **Program the FPGA board**:  
-   Use the Quartus Programmer to load the compiled `.sof` file onto your FPGA board.
+   Use the Quartus to load the compiled `.sof` file onto FPGA board.
 
 ---
 
 ## How to Play
 
-Once the project is successfully loaded onto the FPGA, follow these steps to play the game:
+When the project is loaded onto the FPGA, follow these steps to play the game:
 
 1. **Reset the game**:  
-   Press `KEY[0]` to reset the game. The score (displayed on the HEX0 7-segment display) will reset to 0.
+   Press `KEY[0]` to reset the game. The score (which will be shown on the HEX0 7-segment display) will reset to 0.
 
 2. **Start the game**:  
-   Flip any of the four switches (`SW[3:0]`) to begin the game.
+   Flip any of the four switches `SW[3:0]` to begin the game.
 
 3. **Level 1**:  
-   The score will update to 1, and one of the game LEDs (`LEDR[3:0]`) will flash to indicate the first color in the sequence.
+   The score will update to 1 and one of the game LEDs which are `LEDR[3:0]` will flash to indicate the first color in the sequence.
 
 4. **Your turn**:  
    Flip the switch corresponding to the LED that flashed.
 
 5. **Success**:  
    - If you provide the correct input:  
-     - `LEDR[8]` (Success LED) will flash.  
+     - `LEDR[8]` which is the Success LED will flash.  
      - The score will increase by 1.  
-     - The game will then replay the sequence, adding one new color to the pattern.
+     - The game will then replay the sequence and it will add one new color to the pattern.
 
 6. **Repeat**:  
-   Continue watching and repeating the growing sequence as long as you succeed.
+   Continue watching and repeating the growing sequence as long as success.
 
 7. **Failure**:  
    - If you flip the wrong switch:  
-     - `LEDR[9]` (Fail LED) will flash.  
+     - `LEDR[9]` which is the Fail LED will flash.  
      - All game LEDs will light up.  
-     - The score will reset to 0, and the game will return to IDLE mode, waiting for you to start again.
+     - The score will reset to 0, and the game will return to IDLE mode and it will wait for you to start again.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Here's how you can contribute to this project:
+Contributions are welcome! Method of how you can contribute to this project:
 
 1. **Fork the repository**:  
    Click the "Fork" button on this repository to create a copy on your GitHub account.
@@ -214,11 +214,11 @@ Contributions are welcome! Here's how you can contribute to this project:
    ```bash
    git push origin feature/YourFeature
  6. **Open a pull request:**
-   Go to the original repository on GitHub and open a pull request, explaining the changes you’ve made.
+   Go to the original repository on GitHub and open a pull request
 
 ## Contact
 
-If you have any questions or feedback, feel free to reach out:
+If you have any questions or feedback please tell me:
 - Name: Ali Behbehani
 - Email: ali.behbehani@du.edu
 - GitHub: https://github.com/AMB0000
