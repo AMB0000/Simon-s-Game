@@ -124,7 +124,7 @@ Follow these steps to build and run the project on an FPGA:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/username/fpga-simon-game.git
+   git clone https://github.com/AMB0000/Simon-s-Game.git
 2. **Open Intel Quartus Prime**:  
    Launch the Quartus Prime software and create a new project.
 
