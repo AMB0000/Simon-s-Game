@@ -1,6 +1,6 @@
 ![SIMON's GAME](SIMON's_GAME.png)
 
-# FPGA Simon Memory Game
+# FPGA Simon Says Memory Game
 
 Simon's Game is an old memory game which was first developed in 1980s which we rebuilt from the very start in Verilog. In this project we implemented the full game logic on an FPGA, complete with random sequence generation, a growing-difficulty level, score tracking and I/O handling for buttons and LEDs.
 
