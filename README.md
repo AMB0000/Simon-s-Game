@@ -32,6 +32,8 @@ The game is built with Verilog and runs entirely on an FPGA. It includes:
 
 ## System Architecture
 
+![FPGA Simon Game System Architecture Block Diagram](system_architecture.png)
+
 The design is fully modular, with all components instantiated and connected in the `simon_top.v` module. Below is a summary of the main modules:
 
 ### **`simon_top.v`**
@@ -42,6 +44,7 @@ The design is fully modular, with all components instantiated and connected in t
 ---
 
 ### **`game_fsm.v`**
+
 - The "brain" of the game, implemented as a Finite State Machine.
 - Driven by a 100Hz tick from the clock divider.
 - Manages game states:
