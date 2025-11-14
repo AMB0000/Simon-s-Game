@@ -1,6 +1,6 @@
 # FPGA Simon Memory Game
 
-A classic 1980s memory game, rebuilt from the ground up in Verilog. This project implements the full game logic on an FPGA, complete with random sequence generation, a growing-difficulty level, score tracking, and I/O handling for buttons and LEDs.
+Simon's Game is an old memory game which was first developed in 1980s which we rebuilt from the very start in Verilog. In this project we implemented the full game logic on an FPGA, complete with random sequence generation, a growing-difficulty level, score tracking and I/O handling for buttons and LEDs.
 
 ---
 
@@ -12,21 +12,20 @@ A classic 1980s memory game, rebuilt from the ground up in Verilog. This project
 4. [How to Build](#how-to-build)
 5. [How to Play](#how-to-play)
 6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact](#contact)
+7. [Contact](#contact)
 
 ---
 
 ## About the Project
 
-This project was developed as a final lab for an Advanced Digital Design course, demonstrating the use of Finite State Machines (FSMs), memory, and modular design in hardware.
+This project is a final lab for an Advanced Digital Design course in which we showed the use of Finite State Machines, memory and modular design in hardware.
 
-The game is built with Verilog and runs entirely on an FPGA. It includes:
+The game is built with Verilog and runs on an FPGA. It has:
 - **Random sequence generation** using a Linear Feedback Shift Register (LFSR).
 - **Growing difficulty** as the game progresses.
 - **Score tracking** displayed on a 7-segment display.
-- Robust **button debouncing** for smooth input handling.
-- Modular design for easy understanding and extensibility.
+- **button debouncing** for good input handling.
+- Modular design for easy understanding and buliding easily.
 
 ---
 
@@ -34,12 +33,15 @@ The game is built with Verilog and runs entirely on an FPGA. It includes:
 
 ![FPGA Simon Game System Architecture Block Diagram](system_architecture.png)
 
-The design is fully modular, with all components instantiated and connected in the `simon_top.v` module. Below is a summary of the main modules:
+The design that we used is fully modular with all components instantiated and connected in the 'simon_top.v' module.
+
+
+Summary of the main modules:
 
 ### **`simon_top.v`**
-- The "motherboard" of the project.
-- Instantiates all other modules and connects them to the FPGA pins.
-- Contains no logic of its own.
+- We can say that this is the "motherboard" of the project.
+- It instantiates all other modules and connects them to the FPGA pins.
+- (Rather) has no logic of its own.
 
 ---
 
@@ -60,15 +62,15 @@ stateDiagram-v2
     S_FAIL --> S_FAIL_WAIT: Wait timer
     S_FAIL_WAIT --> S_IDLE: Timer Done
 ```
-- The "brain" of the game, implemented as a Finite State Machine.
-- Driven by a 100Hz tick from the clock divider.
+- We can call this section the "brain" of the game that is implemented as a Finite State Machine.
+- Uses a 100Hz tick from the clock divider.
 - Manages game states:
-  - `S_IDLE`, `S_LEVEL_UP`, `S_SHOW_LED_ON`, `S_SHOW_LED_OFF`, `S_WAIT_INPUT`, `S_CHECK_INPUT`, `S_SUCCESS`, `S_FAIL`, `S_FAIL_WAIT`.
+  - 'S_IDLE', 'S_LEVEL_UP', 'S_SHOW_LED_ON', 'S_SHOW_LED_OFF', 'S_WAIT_INPUT', 'S_CHECK_INPUT', 'S_SUCCESS', 'S_FAIL', 'S_FAIL_WAIT'
 - Coordinates other modules:
   - Tells the LFSR when to generate a new number.
-  - Writes and reads data from `pattern_memory`.
+  - Writes and reads data from 'pattern_memory'.
   - Controls the game LEDs and 7-segment display.
-  - Listens for pulses from the `button_debouncer`.
+  - Listens for pulses from the 'button_debouncer'.
 
 ---
 
