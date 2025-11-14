@@ -234,7 +234,7 @@ Even though the final game is not yet finished, the progress made throughout the
 
 ## Contact
 
-If you have any questions or feedback please tell me:
+If you have any questions or feedback please contact me:
 - Name: Ali Behbehani
 - Email: ali.behbehani@du.edu
 - GitHub: https://github.com/AMB0000
