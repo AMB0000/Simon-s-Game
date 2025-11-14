@@ -33,7 +33,7 @@ The game is built with Verilog and runs on an FPGA. It has:
 
 ## System Architecture
 
-![FPGA Simon Game System Architecture Block Diagram](system_architecture.png)
+![FPGA Simon Game System Architecture Block Diagram](systemarch.png)
 
 The design that we used is fully modular with all components instantiated and connected in the 'main.v' module.
 
