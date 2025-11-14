@@ -20,7 +20,7 @@ Simon's Game is an old memory game which was first developed in 1980s which we r
 
 ## About the Project
 
-This project is a final lab for an Advanced Digital Design course in which we showed the use of Finite State Machines, memory and modular design in hardware.
+This is a final project for an Advanced Digital Design course in which we showed the use of Finite State Machines, memory and modular design in hardware.
 
 The game is built with Verilog and runs on an FPGA. It has:
 - **Random sequence generation** using a Linear Feedback Shift Register (LFSR).
