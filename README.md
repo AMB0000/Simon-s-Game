@@ -215,6 +215,6 @@ Contributions are welcome! Here's how you can contribute to this project:
 ## Contact
 
 If you have any questions or feedback, feel free to reach out:
-- Name: ALI
-- Email: 
-- GitHub:
+- Name: Ali Behbehani
+- Email: ali.behbehani@du.edu
+- GitHub: https://github.com/AMB0000
