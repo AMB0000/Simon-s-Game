@@ -216,6 +216,22 @@ Contributions are welcome! Method of how you can contribute to this project:
  6. **Open a pull request:**
    Go to the original repository on GitHub and open a pull request
 
+
+## Conclusion 
+
+Here is a revised conclusion that includes the fact that the project is not fully complete **and** that you ran into problems with your DE10-Lite board results:
+
+---
+
+## **Conclusion**
+
+Although the Simon Game project was not 100% successful, the work done so far has helped establish a strong foundation for a fully hardware-based memory game on the DE10-Lite FPGA. Core modules such as the clock divider, LFSR, button debouncers, and parts of the game FSM have been designed and tested in simulation, giving a solid understanding of the system’s overall behavior. The architecture is clearly laid out, and the main structure of the game logic is already in place.
+
+However, I ran into issues when testing the design on the actual DE10-Lite board. Some modules did not behave the same way on hardware as they did in simulation, and certain inputs or outputs—such as the buttons, LEDs, or HEX display—did not respond as expected. These hardware-level problems prevented me from fully integrating and validating the complete game. Debugging will require additional testing, checking pin assignments, reviewing clocking behavior, and ensuring stable input signals.
+
+Even though the final game is not yet finished, the progress made throughout the project has strengthened my understanding of Verilog, FSM design, and FPGA-based digital systems. With more time to troubleshoot the hardware issues and refine the remaining modules, the project can be completed and made fully functional on the DE10-Lite platform.
+
+
 ## Contact
 
 If you have any questions or feedback please tell me:
