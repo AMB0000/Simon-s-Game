@@ -44,7 +44,22 @@ The design is fully modular, with all components instantiated and connected in t
 ---
 
 ### **`game_fsm.v`**
-
+```mermaid
+stateDiagram-v2
+    [*] --> S_IDLE: Power On
+    S_IDLE --> S_LEVEL_UP: Any SW Pressed
+    S_LEVEL_UP --> S_SHOW_LED_ON: Sequence Ready
+    S_SHOW_LED_ON --> S_SHOW_LED_OFF: Timer Done
+    S_SHOW_LED_OFF --> S_SHOW_LED_ON: More LEDs in sequence
+    S_SHOW_LED_OFF --> S_WAIT_INPUT: All LEDs shown
+    S_WAIT_INPUT --> S_CHECK_INPUT: Any SW Pressed
+    S_CHECK_INPUT --> S_FAIL: Wrong Input
+    S_CHECK_INPUT --> S_SUCCESS: Correct Input
+    S_SUCCESS --> S_WAIT_INPUT: More inputs in sequence
+    S_SUCCESS --> S_LEVEL_UP: All inputs correct
+    S_FAIL --> S_FAIL_WAIT: Wait timer
+    S_FAIL_WAIT --> S_IDLE: Timer Done
+```
 - The "brain" of the game, implemented as a Finite State Machine.
 - Driven by a 100Hz tick from the clock divider.
 - Manages game states:
